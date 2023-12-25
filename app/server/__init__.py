@@ -25,13 +25,13 @@ from flask_sqlalchemy import SQLAlchemy
 db = SQLAlchemy()
 
 def create_app():
-    app = Flask(__name__)
-    app.config['SQLALCHEMY_DATABASE_URI'] = f"mysql+pymysql://test:future417@localhost/test"
-    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-    db.init_app(app)
+    server = Flask(__name__)
+    server.config['SQLALCHEMY_DATABASE_URI'] = f"mysql+pymysql://test:future417@db/test"
+    server.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    db.init_app(server)
 
     # import Blueprints here to avoid circular imports
     from .views.user_views import example_blueprint
-    app.register_blueprint(example_blueprint)
+    server.register_blueprint(example_blueprint)
 
-    return app
+    return server

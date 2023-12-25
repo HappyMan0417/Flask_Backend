@@ -1,5 +1,5 @@
 from flask import jsonify, Blueprint, request
-from app.models.user_models import get_data, create_data, update_data_by_id, delete_data_by_id
+from server.models.user_models import get_data, create_data, update_data_by_id, delete_data_by_id
 example_blueprint = Blueprint('example', __name__)
 
 @example_blueprint.route('/getdata', methods=['GET'])
