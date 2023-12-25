@@ -21,5 +21,30 @@ def create_data(content):
     new_user = Users(username=username, password=password)
     db.session.add(new_user)
     db.session.commit()
+
+    return new_user
+def update_data_by_id(userid, content):
+
+    user = Users.query.get(userid)
+
+    if not user:
+        return None
+    username = content["username"]
+    password = content["password"]
+    user.username = username
+    user.password = password
+    db.session.commit()
+    return {"message": "User updated successfully", "user": content}, 200 
     
     # return new_user
+
+def delete_data_by_id(userid):
+    user_to_delete = Users.query.get(userid)
+
+    if user_to_delete is None:
+        return None  # return None if user not found
+
+    db.session.delete(user_to_delete)
+    db.session.commit()
+
+    return {"message": "User deleted successfully"}, 200
